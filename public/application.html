@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply at Peppermint Robotics</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f2f1;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 1px solid #ddd;
+        }
+        h1 {
+            text-align: center;
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #555;
+        }
+        input, select, textarea {
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #b0bec5;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: #2bddcb;
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            margin-top: 20px;
+            padding: 8px 0px; /* Reduced padding for a smaller button */
+            background-color: #2bddcb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px; /* Smaller font size */
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #11a88f;
+        }
+        .file-upload {
+            display: flex;
+            align-items: center;
+            border: 1px solid #b0bec5;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+        .file-upload input {
+            border: none;
+            padding: 0;
+            margin: 0;
+            background: none;
+        }
+        .phone-number {
+            display: flex;
+            align-items: center;
+        }
+        .phone-number select, .phone-number input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apply for <span id="position-title"></span></h1>
+        <form id="career-form">
+            <label for="name">Full Name:*</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:*</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:*</label>
+            <div class="phone-number">
+                <select id="country-code" name="countryCode" required>
+                    <option value="+1">+1 (US)</option>
+                    <option value="+44">+44 (UK)</option>
+                    <option value="+91">+91 (IN)</option>
+                    <!-- Add more country codes as needed -->
+                </select>
+                <input type="tel" id="phone" name="phone" maxlength="10" pattern="\d*" placeholder="Enter 10-digit number" required>
+            </div>
+
+            <label for="position">Position Applied For:</label>
+            <input type="text" id="position" name="position" readonly required>
+
+            <label for="cover-letter">Cover Letter:</label>
+            <textarea id="cover-letter" name="coverLetter" rows="4"></textarea>
+
+            <label for="resume">Resume:*</label>
+            <div class="file-upload">
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const position = urlParams.get('position');
+            document.getElementById('position-title').textContent = position;
+            document.getElementById('position').value = position;
+        });
+
+        document.getElementById('career-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const response = await fetch('/apply', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                // Redirect to success page
+                window.location.href = 'success.html';
+            } else {
+                alert('Failed to submit application. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

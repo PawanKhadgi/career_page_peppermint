@@ -1,0 +1,8 @@
+/project-root
+  /public
+    index.html
+    application.html
+    success.html
+  /uploads
+  server1.py
+  package.json
