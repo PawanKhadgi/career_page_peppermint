@@ -10,10 +10,10 @@ import time
 app = Flask(__name__)
 
 # MongoDB Atlas credentials
-username = "pgkhadgi2002"
-password = "Pgk#4321"
-uri = f"mongodb+srv://pgkhadgi2002:Pgk#4321@cluster0.oaw7roj.mongodb.net/"
-#mongodb+srv://pgkhadgi2002:Pgk#4321@cluster0.oaw7roj.mongodb.net/
+username = ""
+password = "*****************"
+uri = f"mongodb+srv://:**********@cluster0.oaw7roj.mongodb.net/"
+
 client = MongoClient(uri)
 
 # Specify the database and collection
